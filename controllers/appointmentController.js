@@ -34,3 +34,18 @@ export const createAppointment = async (req, res) => {
         })
     }
 }
+
+
+export const getAppointmentsByDate = async (req, res) => {
+    const { date } = req.body
+    console.log(date);
+
+    try {
+        const appointments = await Appointment.find({ serviceDate: date })
+        res.status(200).json({
+            appointments
+        })
+    } catch (error) {
+        res.status(404).json({ message: error.message })
+    }
+}
